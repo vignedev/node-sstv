@@ -1,0 +1,29 @@
+{
+  "name": "node-sstv",
+  "version": "1.0.0",
+  "description": "SSTV encoder for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vignedev/node-sstv.git"
+  },
+  "keywords": [
+    "sstv"
+  ],
+  "author": "vignedev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vignedev/node-sstv/issues"
+  },
+  "homepage": "https://github.com/vignedev/node-sstv#readme",
+  "dependencies": {
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}
