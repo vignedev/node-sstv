@@ -1,8 +1,9 @@
-import { EncoderFunction, Mode, SampleFunction, SampleTuple } from '../lib/types'
-import { resizeImage, rgb2yuv, yuv2freq } from '../lib/utils'
+import { EncoderFunction, Mode, SampleTuple } from '../lib/types'
+import { rgb2yuv, yuv2freq } from '../lib/utils'
 
 const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
-    if(encoder.resizeImage) img = resizeImage(img, null, 240, encoder.objectFit)
+    if(encoder.resizeImage) 
+        img.resize(320, 240, {fit: encoder.objectFit})
     
     if(mode == Mode.ROBOT_36) encoder.sampleCalibrationHeader(8)
     else if(mode == Mode.ROBOT_72) encoder.sampleCalibrationHeader(12)

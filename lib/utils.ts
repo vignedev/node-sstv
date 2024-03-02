@@ -1,10 +1,6 @@
 import { Sharp } from "sharp";
 import { ObjectFit, SampleFunction } from "./types";
 
-export function resizeImage(img: Sharp, width: number | null, height: number | null, objectFit: ObjectFit) {
-    return img.resize(width, height, { fit: objectFit })
-}
-
 // equation copied verbatim from the pdf
 export function rgb2yuv(r: number, g: number, b: number): number[]{
     return [

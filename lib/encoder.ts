@@ -42,31 +42,23 @@ export default class SSTVEncoder {
         this.reset() // just to ensure clean slate
 
         // get the sharp image
-        console.time('image.load')
         let img: sharp.Sharp
         if(typeof image === 'string' || Buffer.isBuffer(image)) img = sharp(image)
         else img = image // assume it is a sharp.Sharp otherwise
-        console.timeEnd('image.load')
 
         // encode the image
-        console.time('encode')
         await GetEncoder(mode)!(
             mode,
             img,
             this
         )
-        console.timeEnd('encode')
 
         // TODO: create a sample writer
-        console.time('buffer.aloc')
         const buffer = Buffer.alloc(this.samples.length * 4)
-        console.timeEnd('buffer.aloc')
-        console.time('buffer.write')
         for(const i in this.samples){
             const sample = this.samples[i]
             buffer.writeFloatLE(sample, parseInt(i, 10) * 4)
         }
-        console.timeEnd('buffer.write')
         return buffer
     }
 
