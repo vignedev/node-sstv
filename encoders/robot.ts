@@ -1,14 +1,13 @@
 import { EncoderFunction, Mode, SampleTuple } from '../lib/types'
-import { rgb2yuv, yuv2freq } from '../lib/utils'
+import { rgb2yuv, scanlineGenerator, yuv2freq } from '../lib/utils'
 
 const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
-    if(encoder.resizeImage) 
-        img.resize(320, 240, {fit: encoder.objectFit})
-    
+    if(encoder.resizeImage) img.resize(320, 240, {fit: encoder.objectFit})
+    const { data, info } = await img.raw().toBuffer({ resolveWithObject: true })
+        
     if(mode == Mode.ROBOT_36) encoder.sampleCalibrationHeader(8)
     else if(mode == Mode.ROBOT_72) encoder.sampleCalibrationHeader(12)
 
-    const { data, info } = await img.raw().toBuffer({ resolveWithObject: true })
     let yScanDuration: number, uvScanDuration: number, porchFreq: number
 
     if(mode == Mode.ROBOT_36){
@@ -41,21 +40,12 @@ const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
             encoder.sample(line[Math.floor(scale * i)], null)
     }
 
-    for(let y = 0; y < info.height; ++y){
+    for(const [scanline, y] of scanlineGenerator(data, 'yuv', info, yuv2freq)){
         const isEven = y % 2 == 0
 
-        // create yuv scans, where [0,1,2] = [y,u,v] scans of the line
-        const yuvScans: number[][] = [ [], [], [] ]
-        for(let x = 0; x < info.width; ++x){
-            const offset = (y * info.width + x) * info.channels
-            const yuv = rgb2yuv(data[offset], data[offset + 1], data[offset + 2])
-            for(const c in yuv) yuvScans[c].push(yuv2freq(yuv[c]))
-        }
-
-        // sync + y-scans
         encoder.sample(...syncPulse)
         encoder.sample(...syncPorch)
-        scanLine(yuvScans[0], ySamples, yScale)
+        scanLine(scanline[0], ySamples, yScale)
 
         if(mode == Mode.ROBOT_36){
             // similar to node-sstv, no averaging is taking place -- too much work
@@ -63,7 +53,7 @@ const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
             // {u,v}-scan | scan U on even and Y on odds
             encoder.sample(...(isEven ? separationPulse : oddSeparationPulse))
             encoder.sample(...porch)
-            scanLine(yuvScans[isEven ? 1 : 2], uvSamples, uvScale)
+            scanLine(scanline[isEven ? 1 : 2], uvSamples, uvScale)
         }else if(mode == Mode.ROBOT_72){
             // in the pdf it uses odd separation pulse, however using the same
             // separation pulse somehow resulted in better picture quality on edges
@@ -72,12 +62,12 @@ const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
             // u-scan
             encoder.sample(...separationPulse)
             encoder.sample(...porch)
-            scanLine(yuvScans[1], uvSamples, uvScale)
+            scanLine(scanline[1], uvSamples, uvScale)
 
             // v-scan
             encoder.sample(...separationPulse)
             encoder.sample(...porch)
-            scanLine(yuvScans[2], uvSamples, uvScale)
+            scanLine(scanline[2], uvSamples, uvScale)
         }
     }
 }
