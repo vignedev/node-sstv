@@ -20,7 +20,7 @@ export enum Mode {
     // WRASSE SC2-180
     SC2_180,
 
-    // PAKOSON modes (is that Japanese?)
+    // PASOKON modes (is that Japanese?)
     PASOKON_3,
     PASOKON_5,
     PASOKON_7,
