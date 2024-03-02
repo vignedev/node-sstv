@@ -29,7 +29,7 @@ export default class SSTVEncoder {
     }
 
     // this logic was mostly transcribed from echicken/node-sstv
-    private sample: SampleFunction = (frequency: number, duration: number | null) => {
+    sample: SampleFunction = (frequency: number, duration: number | null) => {
         const n_samples = duration ? (this.sampleRate * (duration / 1000.0)) : 1
         for(let i = 0; i < n_samples; ++i){
             this.samples.push(Math.sin(this.phase))
@@ -53,9 +53,7 @@ export default class SSTVEncoder {
         await GetEncoder(mode)!(
             mode,
             img,
-            this.resizeImage ? this.objectFit : null,
-            this.sample.bind(this),
-            this.sampleRate
+            this
         )
         console.timeEnd('encode')
 
@@ -70,5 +68,37 @@ export default class SSTVEncoder {
         }
         console.timeEnd('buffer.write')
         return buffer
+    }
+
+    // common for all sstvs (headers and such)
+    sampleCalibrationHeader(visCode: number, prependSSTVHeader: boolean = true) {
+        // the sstv header, or as previous repo called it the "deedleEedleMeepMeep"
+        if(prependSSTVHeader){
+            this.sample(1900, 100)
+            this.sample(1500, 100)
+            this.sample(1900, 100)
+            this.sample(1500, 100)
+            this.sample(2300, 100)
+            this.sample(1500, 100)
+            this.sample(2300, 100)
+            this.sample(1500, 100)
+        }
+
+        // actual calibration header
+        this.sample(1900, 300) // Leader tone
+        this.sample(1200, 10)  // Break
+        this.sample(1900, 300) // Leader Tone
+        this.sample(1200, 30)  // VIS Start Bit
+    
+        // visCode is then transmitted as 6bit LSB with 7th bit being parity
+        let isEven = false
+        for(let i = 0; i < 7; ++i){
+            const mask = (visCode & (1 << i)) != 0
+            this.sample(mask ? 1100 : 1300, 30)
+            if(mask) isEven = !isEven
+        }
+        this.sample(isEven ? 1300 : 1100, 30) // parity
+    
+        this.sample(1200, 30)  // VIS End bit
     }
 }

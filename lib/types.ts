@@ -1,4 +1,5 @@
 import sharp from 'sharp'
+import SSTVEncoder from './encoder'
 
 export type ObjectFit = 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
 
@@ -90,8 +91,6 @@ export type SampleTuple = [number, number]
  * Functions responsible for *resizing the image* for the mode if requested and the encoding it 
  * @param {Mode} mode The mode it has been assigned
  * @param {sharp.Sharp} image The sharp image
- * @param {ObjectFit | null} objectFit Determines whether it needs to be resized or not. If set to `null`, resizing does not occur.
- * @param {SampleFunction} sample Function that adds samples of certain frequency and duration.
- * @param {number} sampleRate The given sample rate
+ * @param {SSTVEncoder} encoder The encoder this function is called for
  */
-export type EncoderFunction = (mode: Mode, image: sharp.Sharp, objectFit: ObjectFit | null, sample: SampleFunction, sampleRate: number) => Promise<void>
+export type EncoderFunction = (mode: Mode, image: sharp.Sharp, encoder: SSTVEncoder) => Promise<void>

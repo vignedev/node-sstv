@@ -1,17 +1,11 @@
 import { EncoderFunction, Mode, SampleFunction, SampleTuple } from '../lib/types'
-import { resizeImage, rgb2yuv, sampleCalibrationHeader, sstvHeader, yuv2freq } from '../lib/utils'
+import { resizeImage, rgb2yuv, yuv2freq } from '../lib/utils'
 
-function scanLine(line: number[], n_samples: number, scale: number, sample: SampleFunction){
-    for(let i = 0; i < n_samples; ++i)
-        sample(line[Math.floor(scale * i)], null)
-}
-
-const RobotEncoder: EncoderFunction = async (mode, img, fit, sample, sampleRate) => {
-    img = resizeImage(img, null, 240, fit)
+const RobotEncoder: EncoderFunction = async (mode, img, encoder) => {
+    if(encoder.resizeImage) img = resizeImage(img, null, 240, encoder.objectFit)
     
-    sstvHeader(sample)
-    if(mode == Mode.ROBOT_36) sampleCalibrationHeader(8, sample)
-    else if(mode == Mode.ROBOT_72) sampleCalibrationHeader(12, sample)
+    if(mode == Mode.ROBOT_36) encoder.sampleCalibrationHeader(8)
+    else if(mode == Mode.ROBOT_72) encoder.sampleCalibrationHeader(12)
 
     const { data, info } = await img.raw().toBuffer({ resolveWithObject: true })
     let yScanDuration: number, uvScanDuration: number, porchFreq: number
@@ -36,11 +30,16 @@ const RobotEncoder: EncoderFunction = async (mode, img, fit, sample, sampleRate)
         porch: SampleTuple = [ porchFreq, 1.5 ]
 
     const
-        ySamples = sampleRate * (yScanDuration / 1000.0),
+        ySamples = encoder.sampleRate * (yScanDuration / 1000.0),
         yScale = info.width / ySamples,
-        uvSamples = sampleRate * (uvScanDuration / 1000.0),
+        uvSamples = encoder.sampleRate * (uvScanDuration / 1000.0),
         uvScale = info.width / uvSamples
     
+    function scanLine(line: number[], n_samples: number, scale: number){
+        for(let i = 0; i < n_samples; ++i)
+            encoder.sample(line[Math.floor(scale * i)], null)
+    }
+
     for(let y = 0; y < info.height; ++y){
         const isEven = y % 2 == 0
 
@@ -53,31 +52,31 @@ const RobotEncoder: EncoderFunction = async (mode, img, fit, sample, sampleRate)
         }
 
         // sync + y-scans
-        sample(...syncPulse)
-        sample(...syncPorch)
-        scanLine(yuvScans[0], ySamples, yScale, sample)
+        encoder.sample(...syncPulse)
+        encoder.sample(...syncPorch)
+        scanLine(yuvScans[0], ySamples, yScale)
 
         if(mode == Mode.ROBOT_36){
             // similar to node-sstv, no averaging is taking place -- too much work
 
             // {u,v}-scan | scan U on even and Y on odds
-            sample(...(isEven ? separationPulse : oddSeparationPulse))
-            sample(...porch)
-            scanLine(yuvScans[isEven ? 1 : 2], uvSamples, uvScale, sample)
+            encoder.sample(...(isEven ? separationPulse : oddSeparationPulse))
+            encoder.sample(...porch)
+            scanLine(yuvScans[isEven ? 1 : 2], uvSamples, uvScale)
         }else if(mode == Mode.ROBOT_72){
             // in the pdf it uses odd separation pulse, however using the same
             // separation pulse somehow resulted in better picture quality on edges
             // so for now i'm keeping it both the same separation pulse
 
             // u-scan
-            sample(...separationPulse)
-            sample(...porch)
-            scanLine(yuvScans[1], uvSamples, uvScale, sample)
+            encoder.sample(...separationPulse)
+            encoder.sample(...porch)
+            scanLine(yuvScans[1], uvSamples, uvScale)
 
             // v-scan
-            sample(...separationPulse)
-            sample(...porch)
-            scanLine(yuvScans[2], uvSamples, uvScale, sample)
+            encoder.sample(...separationPulse)
+            encoder.sample(...porch)
+            scanLine(yuvScans[2], uvSamples, uvScale)
         }
     }
 }
