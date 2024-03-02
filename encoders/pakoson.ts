@@ -1,8 +1,8 @@
 import { EncoderFunction, Mode, SampleTuple } from "../lib/types";
 import { rgb2freq, scanlineGenerator } from "../lib/utils";
 
-
-const constants = {
+type PakosonModes = Mode.PASOKON_3 | Mode.PASOKON_5 | Mode.PASOKON_7
+const constants: Record<PakosonModes, { [ key: string ]: number }> = {
     [Mode.PASOKON_3]: {
         visCode: 113,
         scanDuration: 133.333,
@@ -27,8 +27,7 @@ const PakosonEncoder: EncoderFunction = async(stream) => {
     if(stream.resizeImage) stream.image.resize(640, 496, {fit: stream.objectFit})
     const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
 
-    // @ts-ignore
-    const { visCode, scanDuration, syncDuration, porchDuration } = constants[stream.mode]
+    const { visCode, scanDuration, syncDuration, porchDuration } = constants[stream.mode as PakosonModes]
     const syncFrequency = 1200, porchFrequency = 1500
 
     const
