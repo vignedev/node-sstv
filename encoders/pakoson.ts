@@ -23,12 +23,12 @@ const constants = {
     }
 }
 
-const PakosonEncoder: EncoderFunction = async(mode, img, encoder) => {
-    if(encoder.resizeImage) img.resize(640, 496, {fit: encoder.objectFit})
-    const { data, info } = await img.raw().toBuffer({ resolveWithObject: true })
+const PakosonEncoder: EncoderFunction = async(stream) => {
+    if(stream.resizeImage) stream.image.resize(640, 496, {fit: stream.objectFit})
+    const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
 
     // @ts-ignore
-    const { visCode, scanDuration, syncDuration, porchDuration } = constants[mode]
+    const { visCode, scanDuration, syncDuration, porchDuration } = constants[stream.mode]
     const syncFrequency = 1200, porchFrequency = 1500
 
     const
@@ -36,19 +36,19 @@ const PakosonEncoder: EncoderFunction = async(mode, img, encoder) => {
         porch: SampleTuple = [ porchFrequency, porchDuration ]
 
     const
-        scanSamples = encoder.sampleRate * (scanDuration / 1000.0),
+        scanSamples = stream.sampleRate * (scanDuration / 1000.0),
         scanScale = info.width / scanSamples
 
-    encoder.sampleCalibrationHeader(visCode)
+    stream.sampleCalibrationHeader(visCode)
 
     for(const [scanline, y] of scanlineGenerator(data, 'rgb', info, rgb2freq)){
-        encoder.sample(...syncPulse)
+        stream.sample(...syncPulse)
         for(let c = 0; c < 3; ++c){
-            encoder.sample(...porch)
+            stream.sample(...porch)
             for(let i = 0; i < scanSamples; ++i)
-                encoder.sample(scanline[c][Math.floor(i * scanScale)], null)
+                stream.sample(scanline[c][Math.floor(i * scanScale)], null)
         }
-        encoder.sample(...porch)
+        stream.sample(...porch)
     }
 }
 

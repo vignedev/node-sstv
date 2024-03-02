@@ -1,31 +1,40 @@
 import sharp from 'sharp'
-import { Mode, PCMFormat, SSTVEncoderOptions, ObjectFit, EncoderFunction, SampleFunction } from './types'
+import { Mode, PCMFormat, SSTVEncoderOptions, ObjectFit, SampleFunction } from './types'
 import { GetEncoder } from '../encoders'
+import { Readable } from 'stream'
+import { SamplesToBuffer } from './utils'
 
-/** SSTV Encoder class. Behind the scenes, it is just a PCM generator. */
-export default class SSTVEncoder {
+export default class SSTVStream extends Readable{
     sampleRate: number
     pcmFormat: PCMFormat
     objectFit: ObjectFit
     resizeImage: boolean
+    bufferSize: number = 8192
+
+    mode: Mode
+    image: sharp.Sharp
 
     samples: number[]
     phase: number
+    eof: boolean
 
-    constructor(options: SSTVEncoderOptions = {}){
+    constructor(mode: Mode, image: string | Buffer | sharp.Sharp, options: SSTVEncoderOptions = {}){
+        super({
+            highWaterMark: 8192
+        })
+
         this.sampleRate  = options.sampleRate  ?? 44100
         this.pcmFormat   = options.pcmFormat   ?? PCMFormat.UNSIGNED_16_LE
         this.objectFit   = options.objectFit   ?? 'cover'
         this.resizeImage = options.resizeImage ?? true
 
-        this.samples = []
-        this.phase = 0
-    }
+        this.mode = mode
+        if(typeof image === 'string' || Buffer.isBuffer(image)) this.image = sharp(image)
+        else this.image = image // assume it is a sharp.Sharp otherwise
 
-    /** Resets the internal buffers and timers */
-    private reset(){
         this.samples = []
         this.phase = 0
+        this.eof = false
     }
 
     // this logic was mostly transcribed from echicken/node-sstv
@@ -33,36 +42,17 @@ export default class SSTVEncoder {
         const n_samples = duration ? (this.sampleRate * (duration / 1000.0)) : 1
         for(let i = 0; i < n_samples; ++i){
             this.samples.push(Math.sin(this.phase))
+
+            // TODO: maybe pause the encoding if the stream is not being read fast enough
+            if(this.samples.length >= this.bufferSize)
+                this.flush()
+
             this.phase += (2 * Math.PI * frequency) / this.sampleRate
             if(this.phase > (2 * Math.PI)) this.phase -= 2 * Math.PI
         }
     }
 
-    async encode(mode: Mode, image: string | Buffer | sharp.Sharp): Promise<Buffer>{
-        this.reset() // just to ensure clean slate
-
-        // get the sharp image
-        let img: sharp.Sharp
-        if(typeof image === 'string' || Buffer.isBuffer(image)) img = sharp(image)
-        else img = image // assume it is a sharp.Sharp otherwise
-
-        // encode the image
-        await GetEncoder(mode)!(
-            mode,
-            img,
-            this
-        )
-
-        // TODO: create a sample writer
-        const buffer = Buffer.alloc(this.samples.length * 4)
-        for(const i in this.samples){
-            const sample = this.samples[i]
-            buffer.writeFloatLE(sample, parseInt(i, 10) * 4)
-        }
-        return buffer
-    }
-
-    // common for all sstvs (headers and such)
+    // common for all SSTVs (headers and such)
     sampleCalibrationHeader(visCode: number, prependSSTVHeader: boolean = true) {
         // the sstv header, or as previous repo called it the "deedleEedleMeepMeep"
         if(prependSSTVHeader){
@@ -92,5 +82,37 @@ export default class SSTVEncoder {
         this.sample(isEven ? 1300 : 1100, 30) // parity
     
         this.sample(1200, 30)  // VIS End bit
+    }
+
+    /**
+     * Flushes the samples array into the stream queue
+     * @param length Max amount of bytes to flush into the queue.
+     * @returns If the reading can continue
+     */
+    flush(length: number | undefined = undefined): boolean{
+        const [ buffer, n_samples ] = SamplesToBuffer(this.samples, this.pcmFormat, length)
+        this.samples = this.samples.slice(n_samples)
+
+        if(this.samples.length == 0 && this.eof) return this.push(null)
+        return this.push(buffer)
+    }
+
+    _construct(callback: (error?: Error | null | undefined) => void): void {
+        const encoder = GetEncoder(this.mode)
+        if(!encoder) throw Error('Invalid mode or encoder not linked.')
+        encoder(this).then(() => {
+            this.eof = true
+            this.flush()
+        })
+        callback()
+    }
+
+    _read(size: number): void {
+        this.flush(size)
+    }
+
+    _destroy(error: Error | null, callback: (error?: Error | null | undefined) => void): void {
+        // TODO: abort the encoder if necessary, cleanup etc.
+        callback(error)
     }
 }

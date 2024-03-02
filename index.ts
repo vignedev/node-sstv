@@ -1,7 +1,7 @@
-import SSTVEncoder from './lib/encoder'
+import SSTVStream from './lib/stream'
 import { Mode, ObjectFit, SSTVEncoderOptions, PCMFormat } from './lib/types'
 
-export default SSTVEncoder
+export default SSTVStream
 export {
     Mode,
     ObjectFit,

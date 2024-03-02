@@ -1,5 +1,5 @@
 import sharp from 'sharp'
-import SSTVEncoder from './encoder'
+import SSTVStream from './stream'
 
 export type ObjectFit = 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
 
@@ -42,16 +42,12 @@ export enum PCMFormat {
     UNSIGNED_8,
     UNSIGNED_16_LE,
     UNSIGNED_16_BE,
-    UNSIGNED_24_LE,
-    UNSIGNED_24_BE,
     UNSIGNED_32_LE,
     UNSIGNED_32_BE,
 
     SIGNED_8,
     SIGNED_16_LE,
     SIGNED_16_BE,
-    SIGNED_24_LE,
-    SIGNED_24_BE,
     SIGNED_32_LE,
     SIGNED_32_BE,
     
@@ -59,6 +55,25 @@ export enum PCMFormat {
     FLOAT_32_BE,
     FLOAT_64_LE,
     FLOAT_64_BE
+}
+export const PCMFormatSizes: { [ key in PCMFormat ]: number } = {
+    [PCMFormat.UNSIGNED_8    ]: 1,
+    [PCMFormat.SIGNED_8      ]: 1,
+
+    [PCMFormat.UNSIGNED_16_LE]: 2,
+    [PCMFormat.UNSIGNED_16_BE]: 2,
+    [PCMFormat.SIGNED_16_LE  ]: 2,
+    [PCMFormat.SIGNED_16_BE  ]: 2,
+
+    [PCMFormat.UNSIGNED_32_LE]: 4,
+    [PCMFormat.UNSIGNED_32_BE]: 4,
+    [PCMFormat.SIGNED_32_LE  ]: 4,
+    [PCMFormat.SIGNED_32_BE  ]: 4,
+    [PCMFormat.FLOAT_32_LE   ]: 4,
+    [PCMFormat.FLOAT_32_BE   ]: 4,
+
+    [PCMFormat.FLOAT_64_LE   ]: 8,
+    [PCMFormat.FLOAT_64_BE   ]: 8,
 }
 
 /** Options to the SSTV Encoder */
@@ -89,8 +104,6 @@ export type SampleTuple = [number, number]
 
 /**
  * Functions responsible for *resizing the image* for the mode if requested and the encoding it 
- * @param {Mode} mode The mode it has been assigned
- * @param {sharp.Sharp} image The sharp image
- * @param {SSTVEncoder} encoder The encoder this function is called for
+ * @param {SSTVStream} stream
  */
-export type EncoderFunction = (mode: Mode, image: sharp.Sharp, encoder: SSTVEncoder) => Promise<void>
+export type EncoderFunction = (stream: SSTVStream) => Promise<void>

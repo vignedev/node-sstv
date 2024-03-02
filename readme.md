@@ -7,13 +7,13 @@ This library attempts to implement the encoding process of SSTV modes by followi
 ## Example
 
 ```ts
-import * as fs from 'node:fs/promises'
-import { SSTVEncoder, Mode } from 'node-sstv';
+import SSTVStream, { Mode, PCMFormat } from '.'
+import * as fs from 'node:fs'
 
-const encoder = new SSTVEncoder()
-encoder.encode(Mode.ROBOT_36, 'cute_tako.png').then(buffer =>
-    fs.writeFile('cute_tako_s16le_44100.pcm', buffer)
-)
+new SSTVStream(Mode.PASOKON_7, 'cute_tako.png', {
+    pcmFormat: PCMFormat.SIGNED_16_LE,
+    sampleRate: 44100
+}).pipe(fs.createWriteStream('test.pcm'))
 ```
 
 ## License
