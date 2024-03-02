@@ -1,6 +1,7 @@
 import StubEncoder from "./stub"
 import { EncoderFunction, Mode } from "../lib/types"
 import RobotEncoder from "./robot"
+import WrasseEncoder from "./wrasse"
 
 const ModeToEncoderMapping: { [key in Mode]: EncoderFunction } = {
     [Mode.SCOTTIE_1 ]: StubEncoder,
@@ -10,7 +11,7 @@ const ModeToEncoderMapping: { [key in Mode]: EncoderFunction } = {
     [Mode.MARTIN_2  ]: StubEncoder,
     [Mode.ROBOT_36  ]: RobotEncoder,
     [Mode.ROBOT_72  ]: RobotEncoder,
-    [Mode.SC2_180   ]: StubEncoder,
+    [Mode.SC2_180   ]: WrasseEncoder,
     [Mode.PASOKON_3 ]: StubEncoder,
     [Mode.PASOKON_5 ]: StubEncoder,
     [Mode.PASOKON_7 ]: StubEncoder,
