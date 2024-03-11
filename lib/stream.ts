@@ -57,8 +57,9 @@ export default class SSTVStream extends Readable{
             this.sample(scanline[Math.floor(i * scale)], null)
     }
 
-    getImageBuffer(width: number | null, height: number | null){
+    getImageBuffer(width: number | null, height: number | null, grayscale: boolean = false){
         if(this.resizeImage) this.image.resize(width, height, {fit: this.objectFit})
+        this.image.grayscale(grayscale)
         return this.image.raw().toBuffer({ resolveWithObject: true })
     }
 

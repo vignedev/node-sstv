@@ -19,7 +19,12 @@ export function rgb2freq(value: number){
     return yuv2freq(value)
 }
 
-export function* scanlineGenerator(buffer: Buffer, info: OutputInfo, colorspace: 'rgb' | 'yuv', map?: (value: number, channel: number) => number): Generator<[scanLine: number[][], lineNumber: number]>{
+export function bw2freq(value: number) {
+    // they are all in the same range huh, TODO: maybe rename this
+    return yuv2freq(value)
+}
+
+export function* scanlineGenerator(buffer: Buffer, info: OutputInfo, colorspace: 'bw' | 'rgb' | 'yuv', map?: (value: number, channel: number) => number): Generator<[scanLine: number[][], lineNumber: number]>{
     for(let y = 0; y < info.height; ++y){
         const scans: number[][] = [ [], [], [] ]
         for(let x = 0; x < info.width; ++x){
@@ -32,8 +37,8 @@ export function* scanlineGenerator(buffer: Buffer, info: OutputInfo, colorspace:
                 const yuv = rgb2yuv(...pixel)
                 for(let c = 0; c < 3; ++c)
                     scans[c].push(map ? map(yuv[c], c) : yuv[c])
-            }else if(colorspace == 'rgb'){
-                for(let c = 0; c < 3; ++c){
+            }else if(colorspace == 'rgb' || colorspace == 'bw'){
+                for(let c = 0; c < (colorspace == 'bw' ? 1 : 3); ++c){
                     const value = buffer[offset + c]
                     scans[c].push(map ? map(value, c) : value)
                 }

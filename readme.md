@@ -29,7 +29,7 @@ This library attempts to implement the encoding process of SSTV modes by followi
     - [x] PD180
     - [x] PD240
     - [x] PD290
-- [ ] FAX480
+- [x] FAX480
 
 ## Example
 

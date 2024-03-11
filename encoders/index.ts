@@ -3,6 +3,7 @@ import { EncoderFunction, Mode } from "../lib/types"
 import RobotEncoder from "./robot"
 import WrasseEncoder from "./wrasse"
 import PasokonEncoder from "./pasokon"
+import FAX480Encoder from "./fax480"
 import ScottieEncoder from "./scottie"
 import MartinEncoder from "./martin"
 import PDEncoder from "./pd"
@@ -26,7 +27,7 @@ const ModeToEncoderMapping: { [key in Mode]: EncoderFunction } = {
     [Mode.PD180     ]: PDEncoder,
     [Mode.PD240     ]: PDEncoder,
     [Mode.PD290     ]: PDEncoder,
-    [Mode.FAX480    ]: StubEncoder,
+    [Mode.FAX480    ]: FAX480Encoder,
 }
 
 export function GetEncoder(mode: Mode): EncoderFunction | null {
