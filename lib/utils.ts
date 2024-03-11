@@ -130,3 +130,15 @@ export function SamplesToBuffer(samples: number[], format: PCMFormat, length: nu
 
     return [ buffer, n_samples ]
 }
+
+export function averageTwoLines(lineA: number[], lineB: number[]): number[]{
+    if(lineA.length != lineB.length) throw Error('Lines have different sizes')
+    const buffer = Array(lineA.length)
+
+    for(let i = 0; i < lineA.length; ++i){
+        const diff = lineB[i] - lineA[i]
+        buffer[i] = lineA[i] + diff / 2.0
+    }
+
+    return buffer
+}

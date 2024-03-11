@@ -1,5 +1,5 @@
 import { EncoderFunction, Mode, SampleTuple } from '../lib/types'
-import { scanlineGenerator, yuv2freq } from '../lib/utils'
+import { averageTwoLines, scanlineGenerator, yuv2freq } from '../lib/utils'
 
 type RobotModes = Mode.ROBOT_36 | Mode.ROBOT_72
 const constants: Record<RobotModes, { [ key: string ]: number }> = {
@@ -36,6 +36,7 @@ const RobotEncoder: EncoderFunction = async (stream) => {
         uvSamples = stream.sampleRate * (uvScanDuration / 1000.0),
         uvScale = info.width / uvSamples
 
+    let previous_scanline: number[][] | null = null
     for(const [scanline, y] of scanlineGenerator(data, info, 'yuv', yuv2freq)){
         const isEven = y % 2 == 0
 
@@ -44,12 +45,19 @@ const RobotEncoder: EncoderFunction = async (stream) => {
         stream.sampleLine(scanline[0], ySamples, yScale)
 
         if(stream.mode == Mode.ROBOT_36){
-            // similar to node-sstv, no averaging is taking place -- too much work
-
             // {u,v}-scan | scan U on even and Y on odds
             stream.sample(...(isEven ? separationPulse : oddSeparationPulse))
             stream.sample(...porch)
-            stream.sampleLine(scanline[isEven ? 1 : 2], uvSamples, uvScale)
+            
+            const channel: number = isEven ? 1 : 2
+            let line: number[]
+            if(previous_scanline) // previous scanline exists -- average approapriate channel and send it
+                line = averageTwoLines(previous_scanline[channel], scanline[channel])
+            else // no previous scanline, shoot whatever we have
+                line = scanline[channel]
+            
+            stream.sampleLine(line, uvSamples, uvScale)
+            previous_scanline = scanline
         }else if(stream.mode == Mode.ROBOT_72){
             // in the pdf it uses odd separation pulse, however using the same
             // separation pulse somehow resulted in better picture quality on edges
