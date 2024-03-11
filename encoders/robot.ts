@@ -2,8 +2,7 @@ import { EncoderFunction, Mode, SampleTuple } from '../lib/types'
 import { rgb2yuv, scanlineGenerator, yuv2freq } from '../lib/utils'
 
 const RobotEncoder: EncoderFunction = async (stream) => {
-    if(stream.resizeImage) stream.image.resize(320, 240, {fit: stream.objectFit})
-    const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
+    const { data, info } = await stream.getImageBuffer(320, 240)
         
     if(stream.mode == Mode.ROBOT_36) stream.sampleCalibrationHeader(8)
     else if(stream.mode == Mode.ROBOT_72) stream.sampleCalibrationHeader(12)

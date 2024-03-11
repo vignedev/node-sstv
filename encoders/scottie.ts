@@ -17,8 +17,7 @@ const constants: Record<ScottieModes, { [ key: string ]: number}> = {
     }
 }
 const ScottieEncoder: EncoderFunction = async(stream) => {
-    if(stream.resizeImage) stream.image.resize(320, 256, {fit: stream.objectFit})
-    const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
+    const { data, info } = await stream.getImageBuffer(320, 256)
 
     const { visCode, scanDuration } = constants[stream.mode as ScottieModes]
     

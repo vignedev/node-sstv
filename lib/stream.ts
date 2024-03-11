@@ -57,6 +57,11 @@ export default class SSTVStream extends Readable{
             this.sample(scanline[Math.floor(i * scale)], null)
     }
 
+    getImageBuffer(width: number | null, height: number | null){
+        if(this.resizeImage) this.image.resize(width, height, {fit: this.objectFit})
+        return this.image.raw().toBuffer({ resolveWithObject: true })
+    }
+
     // common for all SSTVs (headers and such)
     sampleCalibrationHeader(visCode: number, prependSSTVHeader: boolean = true) {
         // the sstv header, or as previous repo called it the "deedleEedleMeepMeep"

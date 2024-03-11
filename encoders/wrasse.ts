@@ -2,8 +2,7 @@ import { EncoderFunction, SampleTuple } from "../lib/types";
 import { rgb2freq, scanlineGenerator } from "../lib/utils";
 
 const WrasseEncoder: EncoderFunction = async(stream) => {
-    if(stream.resizeImage) stream.image.resize(320, 256, {fit: stream.objectFit})
-    const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
+    const { data, info } = await stream.getImageBuffer(320, 256)
 
     const
         syncPulse: SampleTuple = [ 1200, 5.5225 ],

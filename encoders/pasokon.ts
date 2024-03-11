@@ -24,8 +24,7 @@ const constants: Record<PasokonModes, { [ key: string ]: number }> = {
 }
 
 const PasokonEncoder: EncoderFunction = async(stream) => {
-    if(stream.resizeImage) stream.image.resize(640, 496, {fit: stream.objectFit})
-    const { data, info } = await stream.image.raw().toBuffer({ resolveWithObject: true })
+    const { data, info } = await stream.getImageBuffer(640, 496)
 
     const { visCode, scanDuration, syncDuration, porchDuration } = constants[stream.mode as PasokonModes]
     const syncFrequency = 1200, porchFrequency = 1500
