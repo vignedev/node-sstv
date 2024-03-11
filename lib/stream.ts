@@ -52,6 +52,11 @@ export default class SSTVStream extends Readable{
         }
     }
 
+    sampleLine(scanline: number[], samples: number, scale: number) {
+        for(let i = 0; i < samples; ++i)
+            this.sample(scanline[Math.floor(i * scale)], null)
+    }
+
     // common for all SSTVs (headers and such)
     sampleCalibrationHeader(visCode: number, prependSSTVHeader: boolean = true) {
         // the sstv header, or as previous repo called it the "deedleEedleMeepMeep"

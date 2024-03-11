@@ -44,8 +44,7 @@ const PasokonEncoder: EncoderFunction = async(stream) => {
         stream.sample(...syncPulse)
         for(let c = 0; c < 3; ++c){
             stream.sample(...porch)
-            for(let i = 0; i < scanSamples; ++i)
-                stream.sample(scanline[c][Math.floor(i * scanScale)], null)
+            stream.sampleLine(scanline[c], scanSamples, scanScale)
         }
         stream.sample(...porch)
     }

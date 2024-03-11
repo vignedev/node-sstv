@@ -34,18 +34,13 @@ const RobotEncoder: EncoderFunction = async (stream) => {
         yScale = info.width / ySamples,
         uvSamples = stream.sampleRate * (uvScanDuration / 1000.0),
         uvScale = info.width / uvSamples
-    
-    function scanLine(line: number[], n_samples: number, scale: number){
-        for(let i = 0; i < n_samples; ++i)
-            stream.sample(line[Math.floor(scale * i)], null)
-    }
 
     for(const [scanline, y] of scanlineGenerator(data, 'yuv', info, yuv2freq)){
         const isEven = y % 2 == 0
 
         stream.sample(...syncPulse)
         stream.sample(...syncPorch)
-        scanLine(scanline[0], ySamples, yScale)
+        stream.sampleLine(scanline[0], ySamples, yScale)
 
         if(stream.mode == Mode.ROBOT_36){
             // similar to node-sstv, no averaging is taking place -- too much work
@@ -53,7 +48,7 @@ const RobotEncoder: EncoderFunction = async (stream) => {
             // {u,v}-scan | scan U on even and Y on odds
             stream.sample(...(isEven ? separationPulse : oddSeparationPulse))
             stream.sample(...porch)
-            scanLine(scanline[isEven ? 1 : 2], uvSamples, uvScale)
+            stream.sampleLine(scanline[isEven ? 1 : 2], uvSamples, uvScale)
         }else if(stream.mode == Mode.ROBOT_72){
             // in the pdf it uses odd separation pulse, however using the same
             // separation pulse somehow resulted in better picture quality on edges
@@ -62,12 +57,12 @@ const RobotEncoder: EncoderFunction = async (stream) => {
             // u-scan
             stream.sample(...separationPulse)
             stream.sample(...porch)
-            scanLine(scanline[1], uvSamples, uvScale)
+            stream.sampleLine(scanline[1], uvSamples, uvScale)
 
             // v-scan
             stream.sample(...separationPulse)
             stream.sample(...porch)
-            scanLine(scanline[2], uvSamples, uvScale)
+            stream.sampleLine(scanline[2], uvSamples, uvScale)
         }
     }
 }
