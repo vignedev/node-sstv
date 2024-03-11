@@ -27,7 +27,7 @@ const MartinEncoder: EncoderFunction = async(stream) => {
         scanScale = info.width / scanSamples
 
     stream.sampleCalibrationHeader(visCode)
-    for(const [ scanline, y ] of scanlineGenerator(data, 'rgb', info, rgb2freq)){
+    for(const [ scanline, y ] of scanlineGenerator(data, info, 'rgb', rgb2freq)){
         stream.sample(...syncPulse)
         stream.sample(...syncPorch)
 

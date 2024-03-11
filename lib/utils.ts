@@ -19,7 +19,7 @@ export function rgb2freq(value: number){
     return yuv2freq(value)
 }
 
-export function* scanlineGenerator(buffer: Buffer, colorspace: 'rgb' | 'yuv', info: OutputInfo, map?: (value: number, channel: number) => number): Generator<[scanLine: number[][], lineNumber: number]>{
+export function* scanlineGenerator(buffer: Buffer, info: OutputInfo, colorspace: 'rgb' | 'yuv', map?: (value: number, channel: number) => number): Generator<[scanLine: number[][], lineNumber: number]>{
     for(let y = 0; y < info.height; ++y){
         const scans: number[][] = [ [], [], [] ]
         for(let x = 0; x < info.width; ++x){

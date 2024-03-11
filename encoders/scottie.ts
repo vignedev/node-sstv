@@ -35,7 +35,7 @@ const ScottieEncoder: EncoderFunction = async(stream) => {
     // starting sync pulse
     stream.sample(...syncPulse)
 
-    for(const [ scanline, y ] of scanlineGenerator(data, 'rgb', info, rgb2freq)){
+    for(const [ scanline, y ] of scanlineGenerator(data, info, 'rgb', rgb2freq)){
         stream.sample(...separatorPulse)
         stream.sampleLine(scanline[1], scanSamples, scanScale) // green
         stream.sample(...separatorPulse)

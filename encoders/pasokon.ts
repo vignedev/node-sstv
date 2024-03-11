@@ -39,7 +39,7 @@ const PasokonEncoder: EncoderFunction = async(stream) => {
 
     stream.sampleCalibrationHeader(visCode)
 
-    for(const [scanline, y] of scanlineGenerator(data, 'rgb', info, rgb2freq)){
+    for(const [scanline, y] of scanlineGenerator(data, info, 'rgb', rgb2freq)){
         stream.sample(...syncPulse)
         for(let c = 0; c < 3; ++c){
             stream.sample(...porch)

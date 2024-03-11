@@ -36,7 +36,7 @@ const RobotEncoder: EncoderFunction = async (stream) => {
         uvSamples = stream.sampleRate * (uvScanDuration / 1000.0),
         uvScale = info.width / uvSamples
 
-    for(const [scanline, y] of scanlineGenerator(data, 'yuv', info, yuv2freq)){
+    for(const [scanline, y] of scanlineGenerator(data, info, 'yuv', yuv2freq)){
         const isEven = y % 2 == 0
 
         stream.sample(...syncPulse)

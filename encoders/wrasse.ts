@@ -15,7 +15,7 @@ const WrasseEncoder: EncoderFunction = async(stream) => {
 
     stream.sampleCalibrationHeader(55)
 
-    for(const [scanline, y] of scanlineGenerator(data, 'rgb', info, rgb2freq)){
+    for(const [scanline, y] of scanlineGenerator(data, info, 'rgb', rgb2freq)){
         stream.sample(...syncPulse)
         stream.sample(...porch)
 
