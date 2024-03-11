@@ -21,14 +21,14 @@ This library attempts to implement the encoding process of SSTV modes by followi
     - [x] Pasokon 3
     - [x] Pasokon 5
     - [x] Pasokon 7
-- [ ] "PD" Modes
-    - [ ] PD50
-    - [ ] PD90
-    - [ ] PD120
-    - [ ] PD160
-    - [ ] PD180
-    - [ ] PD240
-    - [ ] PD290
+- [x] "PD" Modes
+    - [x] PD50
+    - [x] PD90
+    - [x] PD120
+    - [x] PD160
+    - [x] PD180
+    - [x] PD240
+    - [x] PD290
 - [ ] FAX480
 
 ## Example
