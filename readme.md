@@ -1,4 +1,4 @@
-# `node-sstv`
+# `sstv`
 
 (Another) SSTV image encoder for NodeJS. Inspired by [echicken/node-sstv](https://github.com/echicken/node-sstv). 
 
