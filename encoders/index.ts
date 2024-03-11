@@ -5,6 +5,7 @@ import WrasseEncoder from "./wrasse"
 import PasokonEncoder from "./pasokon"
 import ScottieEncoder from "./scottie"
 import MartinEncoder from "./martin"
+import PDEncoder from "./pd"
 
 const ModeToEncoderMapping: { [key in Mode]: EncoderFunction } = {
     [Mode.SCOTTIE_1 ]: ScottieEncoder,
@@ -18,13 +19,13 @@ const ModeToEncoderMapping: { [key in Mode]: EncoderFunction } = {
     [Mode.PASOKON_3 ]: PasokonEncoder,
     [Mode.PASOKON_5 ]: PasokonEncoder,
     [Mode.PASOKON_7 ]: PasokonEncoder,
-    [Mode.PD50      ]: StubEncoder,
-    [Mode.PD90      ]: StubEncoder,
-    [Mode.PD120     ]: StubEncoder,
-    [Mode.PD160     ]: StubEncoder,
-    [Mode.PD180     ]: StubEncoder,
-    [Mode.PD240     ]: StubEncoder,
-    [Mode.PD290     ]: StubEncoder,
+    [Mode.PD50      ]: PDEncoder,
+    [Mode.PD90      ]: PDEncoder,
+    [Mode.PD120     ]: PDEncoder,
+    [Mode.PD160     ]: PDEncoder,
+    [Mode.PD180     ]: PDEncoder,
+    [Mode.PD240     ]: PDEncoder,
+    [Mode.PD290     ]: PDEncoder,
     [Mode.FAX480    ]: StubEncoder,
 }
 
