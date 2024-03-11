@@ -1,25 +1,27 @@
 import { EncoderFunction, Mode, SampleTuple } from '../lib/types'
-import { rgb2yuv, scanlineGenerator, yuv2freq } from '../lib/utils'
+import { scanlineGenerator, yuv2freq } from '../lib/utils'
+
+type RobotModes = Mode.ROBOT_36 | Mode.ROBOT_72
+const constants: Record<RobotModes, { [ key: string ]: number }> = {
+    [Mode.ROBOT_36]: {
+        visCode: 8,
+        yScanDuration: 88,
+        uvScanDuration: 44,
+        porchFreq: 1500
+    },
+    [Mode.ROBOT_72]: {
+        visCode: 12,
+        yScanDuration: 138,
+        uvScanDuration: 69,
+        porchFreq: 1900
+    }
+}
 
 const RobotEncoder: EncoderFunction = async (stream) => {
     const { data, info } = await stream.getImageBuffer(320, 240)
-        
-    if(stream.mode == Mode.ROBOT_36) stream.sampleCalibrationHeader(8)
-    else if(stream.mode == Mode.ROBOT_72) stream.sampleCalibrationHeader(12)
-
-    let yScanDuration: number, uvScanDuration: number, porchFreq: number
-
-    if(stream.mode == Mode.ROBOT_36){
-        yScanDuration = 88
-        uvScanDuration = 44
-        porchFreq = 1500
-    }else if(stream.mode == Mode.ROBOT_72){
-        yScanDuration = 138
-        uvScanDuration = 69
-        porchFreq = 1900
-    }else{
-        throw Error('Invalid ROBOT mode')
-    }
+    
+    const { visCode, yScanDuration, uvScanDuration, porchFreq } = constants[stream.mode as RobotModes]
+    stream.sampleCalibrationHeader(visCode)
     
     const
         syncPulse: SampleTuple = [ 1200, 9 ],
