@@ -6,10 +6,10 @@ This library attempts to implement the encoding process of SSTV modes by followi
 
 ## Supported modes
 
-- [ ] Scottie
-    - [ ] Scottie 1
-    - [ ] Scottie 2
-    - [ ] Scottie DX
+- [x] Scottie
+    - [x] Scottie 1
+    - [x] Scottie 2
+    - [x] Scottie DX
 - [ ] Martin
     - [ ] Martin 1
     - [ ] Martin 2
