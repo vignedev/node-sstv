@@ -10,9 +10,9 @@ This library attempts to implement the encoding process of SSTV modes by followi
     - [x] Scottie 1
     - [x] Scottie 2
     - [x] Scottie DX
-- [ ] Martin
-    - [ ] Martin 1
-    - [ ] Martin 2
+- [x] Martin
+    - [x] Martin 1
+    - [x] Martin 2
 - [x] Robot Color
     - [x] Robot 36
     - [x] Robot 72
