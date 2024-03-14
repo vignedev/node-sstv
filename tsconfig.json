@@ -7,10 +7,18 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "sourceMap": true,
-        "strict": true
+        "strict": true,
+        "outDir": "./dist",
+        "declaration": true,
+        "declarationMap": true
     },
     "exclude": [
         "node_modules",
         "**/node_modules/*"
+    ],
+    "include": [
+        "index.ts",
+        "lib/*.ts",
+        "encoders/*.ts"
     ]
 }
