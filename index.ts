@@ -6,5 +6,6 @@ export {
     Mode,
     ObjectFit,
     SSTVEncoderOptions,
-    PCMFormat
+    PCMFormat,
+    SSTVStream
 }
