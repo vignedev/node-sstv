@@ -24,6 +24,15 @@ export function bw2freq(value: number) {
     return yuv2freq(value)
 }
 
+/**
+ * Generates scanlines of each channels of an image.
+ * Setting the colorspace to `bw` will return only the first channel.
+ * Using `rgb` will return each of the channels, and `yuv` will return each of the YUV planes.
+ * @param buffer The image buffer
+ * @param info The metadata of said image buffer
+ * @param colorspace Desired colorspace it should output
+ * @param map Map function to apply to each scanned pixel
+ */
 export function* scanlineGenerator(buffer: Buffer, info: OutputInfo, colorspace: 'bw' | 'rgb' | 'yuv', map?: (value: number, channel: number) => number): Generator<[scanLine: number[][], lineNumber: number]>{
     for(let y = 0; y < info.height; ++y){
         const scans: number[][] = [ [], [], [] ]
@@ -136,6 +145,12 @@ export function SamplesToBuffer(samples: number[], format: PCMFormat, length: nu
     return [ buffer, n_samples ]
 }
 
+/**
+ * Averages the values from the provided arrays/lines.
+ * @param lineA First line
+ * @param lineB Second line
+ * @returns Array of the same size, however averaged values between provided ones.
+ */
 export function averageTwoLines(lineA: number[], lineB: number[]): number[]{
     if(lineA.length != lineB.length) throw Error('Lines have different sizes')
     const buffer = Array(lineA.length)

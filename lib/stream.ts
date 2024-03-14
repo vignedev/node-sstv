@@ -4,6 +4,7 @@ import { GetEncoder } from '../encoders'
 import { Readable } from 'stream'
 import { SamplesToBuffer } from './utils'
 
+/** Outputs a SSTV PCM stream of set format */
 export default class SSTVStream extends Readable{
     sampleRate: number
     pcmFormat: PCMFormat
@@ -18,6 +19,12 @@ export default class SSTVStream extends Readable{
     phase: number
     eof: boolean
 
+    /**
+     * 
+     * @param mode The mode the image should be encoded in
+     * @param image Either a path to an image, buffer of a image or a Sharp image itself
+     * @param options Tunable options to the encoding process
+     */
     constructor(mode: Mode, image: string | Buffer | sharp.Sharp, options: SSTVEncoderOptions = {}){
         super({
             highWaterMark: 8192
@@ -38,6 +45,7 @@ export default class SSTVStream extends Readable{
     }
 
     // this logic was mostly transcribed from echicken/node-sstv
+    // however it was updated to be usable as a stream
     sample: SampleFunction = (frequency: number, duration: number | null) => {
         const n_samples = duration ? (this.sampleRate * (duration / 1000.0)) : 1
         for(let i = 0; i < n_samples; ++i){
@@ -52,18 +60,36 @@ export default class SSTVStream extends Readable{
         }
     }
 
+    /**
+     * Convenience function to sample a line of arbitrary channel
+     * @param scanline The line represented by numbers ranging from 0 to 255
+     * @param samples Number of samples it should process
+     * @param scale Scale of the sampling process
+     */
     sampleLine(scanline: number[], samples: number, scale: number) {
         for(let i = 0; i < samples; ++i)
             this.sample(scanline[Math.floor(i * scale)], null)
     }
 
+    /**
+     * Retrieves the image as a buffer, resized or grayscaled if requested.
+     * The width/height is requested by each of the encoders.
+     * @param width Desired width of the image, refer to sharp's resize function
+     * @param height Desired height of the image, refer to sharp's resize function
+     * @param grayscale Grayscales the image
+     * @returns Promise of image data in a buffer and its metadata
+     */
     getImageBuffer(width: number | null, height: number | null, grayscale: boolean = false){
         if(this.resizeImage) this.image.resize(width, height, {fit: this.objectFit})
         this.image.grayscale(grayscale)
         return this.image.raw().toBuffer({ resolveWithObject: true })
     }
 
-    // common for all SSTVs (headers and such)
+    /**
+     * Samples the common ROBOT calibration header with approapriate VIS code
+     * @param visCode VIS Calibration code
+     * @param prependSSTVHeader Prepends the "SSTV" tone to the front
+     */
     sampleCalibrationHeader(visCode: number, prependSSTVHeader: boolean = true) {
         // the sstv header, or as previous repo called it the "deedleEedleMeepMeep"
         if(prependSSTVHeader){
@@ -98,7 +124,7 @@ export default class SSTVStream extends Readable{
     /**
      * Flushes the samples array into the stream queue
      * @param length Max amount of bytes to flush into the queue.
-     * @returns If the reading can continue
+     * @returns If the reading can continue (refer to push function override documentation)
      */
     flush(length: number | undefined = undefined): boolean{
         const [ buffer, n_samples ] = SamplesToBuffer(this.samples, this.pcmFormat, length)

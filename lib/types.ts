@@ -1,8 +1,10 @@
 import sharp from 'sharp'
 import SSTVStream from './stream'
 
+/** The way the image is resized to fit the SSTV Mode's resolution. */
 export type ObjectFit = 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
 
+/** Different SSTV modes that are supported. */
 export enum Mode {
     // SCOTTIE modes
     SCOTTIE_1,
@@ -37,7 +39,7 @@ export enum Mode {
     // FAX480 mode
     FAX480
 }
-
+/** Format of the output PCM stream. */
 export enum PCMFormat {
     UNSIGNED_8,
     UNSIGNED_16_LE,
@@ -56,6 +58,8 @@ export enum PCMFormat {
     FLOAT_64_LE,
     FLOAT_64_BE
 }
+
+/** Gets the size of the selected data format in bytes. */
 export const PCMFormatSizes: { [ key in PCMFormat ]: number } = {
     [PCMFormat.UNSIGNED_8    ]: 1,
     [PCMFormat.SIGNED_8      ]: 1,
