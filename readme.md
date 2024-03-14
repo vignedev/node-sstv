@@ -37,6 +37,8 @@ This library attempts to implement the encoding process of SSTV modes by followi
 
 ## API
 
+Refer to the [generated documentation](docs/modules.md).
+
 ## Supported modes
 
 - [x] Scottie
