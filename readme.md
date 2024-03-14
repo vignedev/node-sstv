@@ -4,6 +4,10 @@
 
 This library attempts to implement the encoding process of SSTV modes by following the [*Proposal for SSTV Mode Specifications*](http://www.barberdsp.com/downloads/Dayton%20Paper.pdf) paper by JL Barber, and [echicken/node-sstv](https://github.com/echicken/node-sstv)'s repository as reference for the PCM generation and scanline sampling.
 
+## API
+
+Refer to the [generated documentation](docs/modules.md).
+
 ## Examples
 
 - Creates a SSTV stream using mode Pakoson 7 into a file.
@@ -35,36 +39,29 @@ This library attempts to implement the encoding process of SSTV modes by followi
     }).pipe(ffplay.stdin)
     ```
 
-## API
-
-Refer to the [generated documentation](docs/modules.md).
-
 ## Supported modes
 
-- [x] Scottie
-    - [x] Scottie 1
-    - [x] Scottie 2
-    - [x] Scottie DX
-- [x] Martin
-    - [x] Martin 1
-    - [x] Martin 2
-- [x] Robot Color
-    - [x] Robot 36
-    - [x] Robot 72
-- [x] Wrasse SC2-180
-- [x] Pasokon "P"
-    - [x] Pasokon 3
-    - [x] Pasokon 5
-    - [x] Pasokon 7
-- [x] "PD" Modes
-    - [x] PD50
-    - [x] PD90
-    - [x] PD120
-    - [x] PD160
-    - [x] PD180
-    - [x] PD240
-    - [x] PD290
-- [x] FAX480
+|Mode|Alias|
+|-|-|
+|Scottie 1|`Mode.SCOTTIE_1`|
+|Scottie 2|`Mode.SCOTTIE_2`|
+|Scottie DX|`Mode.SCOTTIE_DX`|
+|Martin 1|`Mode.MARTIN_1`|
+|Martin 2|`Mode.MARTIN_2`|
+|Robot Color 36|`Mode.ROBOT_36`|
+|Robot Color 72|`Mode.ROBOT_72`|
+|Wrasse SC2-180|`Mode.SC2_180`|
+|Pasokon 3|`Mode.PASOKON_3`|
+|Pasokon 5|`Mode.PASOKON_5`|
+|Pasokon 7|`Mode.PASOKON_7`|
+|PD50|`Mode.PD50`|
+|PD90|`Mode.PD90`|
+|PD120|`Mode.PD120`|
+|PD160|`Mode.PD160`|
+|PD180|`Mode.PD180`|
+|PD240|`Mode.PD240`|
+|PD290|`Mode.PD290`|
+|FAX480|`Mode.FAX480`|
 
 ## License
 
