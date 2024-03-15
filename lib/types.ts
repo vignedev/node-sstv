@@ -97,12 +97,6 @@ export type SSTVEncoderOptions = {
     resizeImage?: boolean
 }
 
-/**
- * @param {number} frequency Frequency of the sine in Hz
- * @param {number | null} duration Duration in miliseconds. If set to `null`, it will only add a single sample to the PCM.
- */
-export type SampleFunction = (frequency: number, duration: number | null) => void
-
 /** Combination of `[0] = frequency` and `[1] = duration`*/
 export type SampleTuple = [number, number]
 

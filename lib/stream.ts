@@ -1,5 +1,5 @@
 import sharp from 'sharp'
-import { Mode, PCMFormat, SSTVEncoderOptions, ObjectFit, SampleFunction } from './types'
+import { Mode, PCMFormat, SSTVEncoderOptions, ObjectFit } from './types'
 import { GetEncoder } from '../encoders'
 import { Readable } from 'stream'
 import { SamplesToBuffer } from './utils'
@@ -46,7 +46,11 @@ export default class SSTVStream extends Readable{
 
     // this logic was mostly transcribed from echicken/node-sstv
     // however it was updated to be usable as a stream
-    sample: SampleFunction = (frequency: number, duration: number | null) => {
+    /**
+     * @param {number} frequency Frequency of the sine in Hz
+     * @param {number | null} duration Duration in miliseconds. If set to `null`, it will only add a single sample to the PCM.
+     */
+    sample(frequency: number, duration: number | null) {
         const n_samples = duration ? (this.sampleRate * (duration / 1000.0)) : 1
         for(let i = 0; i < n_samples; ++i){
             this.samples.push(Math.sin(this.phase))
