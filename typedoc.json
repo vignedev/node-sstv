@@ -1,0 +1,7 @@
+{
+    "excludeExternals": true,
+    "gitRevision": "master",
+    "out": "./docs",
+    "entryPoints": [ "index.ts" ],
+    "plugin": [ "typedoc-plugin-markdown" ]
+}

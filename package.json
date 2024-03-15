@@ -4,7 +4,7 @@
   "description": "SSTV encoder for nodejs",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs": "typedoc"
   },
   "repository": {
     "type": "git",
