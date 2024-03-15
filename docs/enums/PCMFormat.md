@@ -31,7 +31,7 @@ Format of the output PCM stream.
 
 #### Defined in
 
-[lib/types.ts:57](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L57)
+[lib/types.ts:57](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L57)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:56](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L56)
+[lib/types.ts:56](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L56)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:59](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L59)
+[lib/types.ts:59](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L59)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:58](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L58)
+[lib/types.ts:58](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L58)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:52](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L52)
+[lib/types.ts:52](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L52)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:51](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L51)
+[lib/types.ts:51](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L51)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:54](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L54)
+[lib/types.ts:54](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L54)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:53](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L53)
+[lib/types.ts:53](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L53)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:50](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L50)
+[lib/types.ts:50](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L50)
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:46](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L46)
+[lib/types.ts:46](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L46)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:45](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L45)
+[lib/types.ts:45](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L45)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:48](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L48)
+[lib/types.ts:48](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L48)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:47](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L47)
+[lib/types.ts:47](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L47)
 
 ___
 
@@ -161,4 +161,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:44](https://github.com/vignedev/node-sstv/blob/f2bf1d9/lib/types.ts#L44)
+[lib/types.ts:44](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L44)
