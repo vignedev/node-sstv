@@ -1,6 +1,6 @@
 {
     "excludeExternals": true,
-    "gitRevision": "master",
+    "gitRevision": "main",
     "out": "./docs",
     "entryPoints": [ "index.ts" ],
     "plugin": [ "typedoc-plugin-markdown" ]
