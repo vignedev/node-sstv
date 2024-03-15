@@ -267,7 +267,7 @@ ___
 
 ### getImageBuffer
 
-▸ **getImageBuffer**(`width`, `height`, `grayscale?`): `Promise`\<{}\>
+▸ **getImageBuffer**(`width`, `height`, `grayscale?`): `Promise`\<\{ `data`: `Buffer` ; `info`: `OutputInfo`  }\>
 
 Retrieves the image as a buffer, resized or grayscaled if requested.
 The width/height is requested by each of the encoders.
@@ -282,7 +282,7 @@ The width/height is requested by each of the encoders.
 
 #### Returns
 
-`Promise`\<{}\>
+`Promise`\<\{ `data`: `Buffer` ; `info`: `OutputInfo`  }\>
 
 Promise of image data in a buffer and its metadata
 

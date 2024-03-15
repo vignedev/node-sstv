@@ -83,7 +83,7 @@ export default class SSTVStream extends Readable{
      * @param grayscale Grayscales the image
      * @returns Promise of image data in a buffer and its metadata
      */
-    getImageBuffer(width: number | null, height: number | null, grayscale: boolean = false){
+    getImageBuffer(width: number | null, height: number | null, grayscale: boolean = false): Promise<{ data: Buffer; info: sharp.OutputInfo }> {
         if(this.resizeImage) this.image.resize(width, height, {fit: this.objectFit})
         this.image.grayscale(grayscale)
         return this.image.raw().toBuffer({ resolveWithObject: true })
