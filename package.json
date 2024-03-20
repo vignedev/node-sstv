@@ -4,7 +4,8 @@
   "description": "SSTV encoder for nodejs",
   "main": "dist/index.js",
   "scripts": {
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "dist": "tsc"
   },
   "repository": {
     "type": "git",

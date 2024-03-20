@@ -132,3 +132,8 @@ out
 
 # Test outputs
 test.pcm
+test.js
+test.ts
+
+# Disregard docs for npm
+docs
