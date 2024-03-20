@@ -38,7 +38,7 @@ The way the image is resized to fit the SSTV Mode's resolution.
 
 #### Defined in
 
-[lib/types.ts:5](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L5)
+[lib/types.ts:5](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L5)
 
 ___
 
@@ -59,4 +59,4 @@ Options to the SSTV Encoder
 
 #### Defined in
 
-[lib/types.ts:84](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L84)
+[lib/types.ts:84](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L84)

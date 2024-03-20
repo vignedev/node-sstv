@@ -64,7 +64,7 @@ Readable.constructor
 
 #### Defined in
 
-[lib/stream.ts:28](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L28)
+[lib/stream.ts:28](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L28)
 
 ## Properties
 
@@ -74,7 +74,7 @@ Readable.constructor
 
 #### Defined in
 
-[lib/stream.ts:13](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L13)
+[lib/stream.ts:13](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L13)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:20](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L20)
+[lib/stream.ts:20](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L20)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:16](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L16)
+[lib/stream.ts:16](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L16)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:15](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L15)
+[lib/stream.ts:15](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L15)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:11](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L11)
+[lib/stream.ts:11](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L11)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:10](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L10)
+[lib/stream.ts:10](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L10)
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:19](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L19)
+[lib/stream.ts:19](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L19)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:12](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L12)
+[lib/stream.ts:12](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L12)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:9](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L9)
+[lib/stream.ts:9](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L9)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:18](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L18)
+[lib/stream.ts:18](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L18)
 
 ## Methods
 
@@ -188,7 +188,7 @@ Readable.\_construct
 
 #### Defined in
 
-[lib/stream.ts:141](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L141)
+[lib/stream.ts:141](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L141)
 
 ___
 
@@ -213,7 +213,7 @@ Readable.\_destroy
 
 #### Defined in
 
-[lib/stream.ts:155](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L155)
+[lib/stream.ts:155](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L155)
 
 ___
 
@@ -237,7 +237,7 @@ Readable.\_read
 
 #### Defined in
 
-[lib/stream.ts:151](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L151)
+[lib/stream.ts:151](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L151)
 
 ___
 
@@ -261,7 +261,7 @@ If the reading can continue (refer to push function override documentation)
 
 #### Defined in
 
-[lib/stream.ts:133](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L133)
+[lib/stream.ts:133](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L133)
 
 ___
 
@@ -288,7 +288,7 @@ Promise of image data in a buffer and its metadata
 
 #### Defined in
 
-[lib/stream.ts:86](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L86)
+[lib/stream.ts:86](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L86)
 
 ___
 
@@ -309,7 +309,7 @@ ___
 
 #### Defined in
 
-[lib/stream.ts:53](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L53)
+[lib/stream.ts:53](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L53)
 
 ___
 
@@ -332,7 +332,7 @@ Samples the common ROBOT calibration header with approapriate VIS code
 
 #### Defined in
 
-[lib/stream.ts:97](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L97)
+[lib/stream.ts:97](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L97)
 
 ___
 
@@ -356,4 +356,4 @@ Convenience function to sample a line of arbitrary channel
 
 #### Defined in
 
-[lib/stream.ts:73](https://github.com/vignedev/node-sstv/blob/master/lib/stream.ts#L73)
+[lib/stream.ts:73](https://github.com/vignedev/node-sstv/blob/main/lib/stream.ts#L73)

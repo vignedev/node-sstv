@@ -36,7 +36,7 @@ Different SSTV modes that are supported.
 
 #### Defined in
 
-[lib/types.ts:40](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L40)
+[lib/types.ts:40](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L40)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:15](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L15)
+[lib/types.ts:15](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L15)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:16](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L16)
+[lib/types.ts:16](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L16)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:26](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L26)
+[lib/types.ts:26](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L26)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:27](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L27)
+[lib/types.ts:27](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L27)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:28](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L28)
+[lib/types.ts:28](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L28)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:33](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L33)
+[lib/types.ts:33](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L33)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:34](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L34)
+[lib/types.ts:34](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L34)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:35](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L35)
+[lib/types.ts:35](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L35)
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:36](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L36)
+[lib/types.ts:36](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L36)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:37](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L37)
+[lib/types.ts:37](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L37)
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:31](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L31)
+[lib/types.ts:31](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L31)
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:32](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L32)
+[lib/types.ts:32](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L32)
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:19](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L19)
+[lib/types.ts:19](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L19)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:20](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L20)
+[lib/types.ts:20](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L20)
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:23](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L23)
+[lib/types.ts:23](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L23)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:10](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L10)
+[lib/types.ts:10](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L10)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:11](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L11)
+[lib/types.ts:11](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L11)
 
 ___
 
@@ -216,4 +216,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:12](https://github.com/vignedev/node-sstv/blob/master/lib/types.ts#L12)
+[lib/types.ts:12](https://github.com/vignedev/node-sstv/blob/main/lib/types.ts#L12)
